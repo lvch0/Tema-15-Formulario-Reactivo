@@ -1,35 +1,36 @@
 import React, { useState } from 'react'
+import { Datos } from './Datos'
 
 export const Formulario = () => {
-    const [datos, setDatos] = useState({
-        nombre: "",
-        domicilio: ""
-    })
 
-    const handleInputChange = (event) => {
-        //console.log(event.target.value)
-        setDatos({
-            ...datos,
-            [event.target.name] : event.target.value
-        })
-    }
+    const [nombre, setNombre] = useState("")
+    const [domicilio, setDomicilio] = useState("")
 
-    const enviarDatos = (event) => {
-        event.preventDefault();
-        console.log(datos.nombre + " " + datos.domicilio)
-    }
+    // const handleInputChange = (event) => {
+    //     //console.log(event.target.value)
+    //     setDatos({
+    //         ...datos,
+    //         [event.target.name] : event.target.value
+    //     })
+    // }
+
+    // const enviarDatos = (event) => {
+    //     event.preventDefault();
+    //     console.log(datos.nombre + " " + datos.domicilio)
+    // }
 
     return (
         <>
             <h1>Formulario</h1>
-            <form className='row' onSubmit={enviarDatos}>
+            <form className='row'>
                 <div className='col=md=3'>
                     <input
                         placeholder="Ingrese nombre"
                         className='form-control'
                         type="text"
                         name="nombre"
-                        onChange={handleInputChange}
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
                     ></input>
                 </div>
                 <div className='col=md=3'>
@@ -38,14 +39,20 @@ export const Formulario = () => {
                         className='form-control'
                         type="text"
                         name="domicilio"
-                        onChange={handleInputChange}
+                        value={domicilio}
+                        onChange={(e) => setDomicilio(e.target.value)}
                     ></input>
                 </div>
                 <div className='col=md=3'>
                     <button className='btn btn-primary' type='submit'>Enviar</button>
-                </div>
+                </div>   
+                
             </form>
-            <h3>{datos.nombre} - {datos.domicilio}</h3>
+
+            <Datos nombre={nombre} domicilio={domicilio}>
+
+            </Datos>
+            
         </>
     )
 }
